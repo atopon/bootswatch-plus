@@ -69,6 +69,16 @@
 
       <pre>M:\g4\bootswatch>grunt swatch_scss:custom</pre>
 
+      <h2>Downloads</h2>
+
+      <%-- Variable style has been set in header.jsp --%>
+      <p>
+      <ul>
+        <li><a href="<c:url value="/static/bootstrap337/${style}/bootstrap.css" />">bootstrap.css</a></li>
+        <li><a href="<c:url value="/static/bootstrap337/${style}/bootstrap.min.css" />">bootstrap.min.css</a></li>
+      </ul>
+      </p>
+
       <!-- Elements -->
       <h2>Elements</h2>
 

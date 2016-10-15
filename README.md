@@ -20,4 +20,9 @@ Bootswatch-plus adds the following variations to the Bootswatch themes:
 
 Simply copy the supplied CSS and replace the ones that come with Bootstrap.
 
+
+## Demo
+
+Visit: https://test.atopon.com/bootswatch-plus/
+
 Enjoy!
