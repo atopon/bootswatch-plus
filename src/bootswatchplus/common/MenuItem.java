@@ -7,7 +7,7 @@ package bootswatchplus.common;
  *
  * @author Kostas Symeonidis
  */
-class MenuItem {
+public class MenuItem {
 
   // ---- Member Variables --------------------------------------------------
 
@@ -17,7 +17,7 @@ class MenuItem {
 
   // ---- Constructors ------------------------------------------------------
 
-  MenuItem(String[] items) {
+  public MenuItem(String[] items) {
     if (items.length == 3) {
       this.id = items[0];
       this.title = items[1];
