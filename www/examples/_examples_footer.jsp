@@ -22,9 +22,19 @@
         <li class="pull-right"><a href="#top">Back to top</a></li>
       </ul>
 
-      <p>Bootswatch made by <a href="http://thomaspark.co" rel="nofollow">Thomas Park</a>.</p>
-      <p>Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/gh-pages/LICENSE">MIT License</a>.</p>
-      <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
+      <p>
+        <strong>Bootswatch-plus:</strong> alterations made by <a href="https://github.com/ksymeon" rel="nofollow">Kostas Symeonidis</a>.
+        Code released under the <a href="https://github.com/atopon/bootswatch-plus/blob/master/LICENSE">MIT License</a>.
+        Based on <a href="https://github.com/thomaspark/bootswatch" rel="nofollow">Bootswatch</a>.
+      </p>
+
+      <p>
+        <strong>Bootswatch:</strong> made by <a href="http://thomaspark.co" rel="nofollow">Thomas Park</a>.
+        Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/gh-pages/LICENSE">MIT License</a>.
+        Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
+        Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
+        Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.
+      </p>
 
     </div>
   </div>
