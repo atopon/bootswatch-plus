@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+
+<!-- ###################################################################### -->
+<!-- ## TANGO build file                                                    -->
+<!-- ###################################################################### -->
+
+<project name="bootstrap-test" basedir="." default="help">
+
+  <!-- ================================================================== -->
+  <!-- ==== Global Environment                                            -->
+  <!-- ================================================================== -->
+
+  <!-- Sets the DSTAMP, TSTAMP, and TODAY properties in the current project.
+       By default, the DSTAMP property is in the format "yyyyMMdd",
+       TSTAMP is in the format "hhmm", and TODAY is in the format "MMMM dd yyyy". -->
+  <tstamp/>
+
+  <!-- get the environment variables -->
+  <property environment="env"/>
+
+  <!-- ================================================================== -->
+  <!-- ==== Properties                                                    -->
+  <!-- ================================================================== -->
+
+  <property file="build.properties"/>
+
+  <property name="lib.dir" location="lib"/>
+  <property name="src.dir" location="src"/>
+  <property name="etc.dir" location="etc"/>
+  <property name="test_src.dir" location="test"/>
+  <property name="www.dir" location="www"/>
+
+  <property name="staging.classes.dir" value="${staging.base.dir}/classes"/>
+  <property name="staging.test_classes.dir" value="${staging.base.dir}/test_classes"/>
+  <property name="staging.test_results.dir" value="${staging.base.dir}/test_results"/>
+
+  <property name="staging.webapp.dir" value="${staging.base.dir}/${app.name}"/>
+  <property name="staging.app.jar" value="${staging.webapp.dir}/WEB-INF/lib/${app.name}.jar"/>
+
+  <!-- Tomcat deployment -->
+  <property name="tomcat.webapps.dir" value="${tomcat.base.dir}/webapps"/>
+  <property name="tomcat.webapp.name" value="${app.name}"/>
+
+  <!-- ================================================================== -->
+  <!-- ==== Selectors                                                     -->
+  <!-- ================================================================== -->
+
+
+  <!-- ================================================================== -->
+  <!-- ==== Paths and patternsets                                         -->
+  <!-- ================================================================== -->
+
+  <patternset id="server_lib.pattern">
+    <include name="servlet-api.jar"/>
+    <include name="catalina.jar"/>
+  </patternset>
+
+  <!-- WEB-INF lib libraries -->
+  <patternset id="lib.pattern">
+
+    <!-- Stripes and dependants libraries
+    <include name="stripes/stripes-1.5.1.jar"/>
+    <include name="oreilly/cos.jar"/>
+    -->
+
+    <!-- Apache Commons
+    <include name="apache/commons/commons-lang-2.4.jar"/>
+    <include name="apache/commons/commons-logging-1.1.1.jar"/>
+    <include name="apache/commons/commons-dbcp-1.2.2.jar"/>
+    <include name="apache/commons/commons-pool-1.4.jar"/>
+    -->
+
+    <!-- JSTL -->
+    <include name="jstl-1.1.2.jar"/>
+    <include name="standard-1.1.2.jar"/>
+
+  </patternset>
+
+  <path id="webapp.classpath">
+    <fileset dir="${tomcat.base.dir}/lib">
+      <patternset refid="server_lib.pattern"/>
+    </fileset>
+    <fileset dir="${lib.dir}">
+      <patternset refid="lib.pattern"/>
+    </fileset>
+  </path>
+
+  <!-- classpath used to compile unit tests -->
+  <path id="webapp.test.classpath">
+
+    <!-- first, all of the requires libraries for the compilation of the app itself -->
+    <path refid="webapp.classpath"/>
+
+    <!-- secondly, the classes of this webapp as compiled in the staging dir -->
+    <pathelement path="${staging.classes.dir}"/>
+
+    <!-- finally, the JUnit jar file -->
+    <pathelement path="${lib.dir}/junit-4.8.2.jar"/>
+  </path>
+
+  <patternset id="www.pattern">
+    <include name="**/*.jsp"/>
+    <include name="**/*.properties"/>
+    <include name="**/*.tld"/>
+    <include name="**/*.xml"/>
+
+    <!-- static pattern -->
+    <include name="**/*.html"/>
+    <include name="**/*.css"/>
+    <include name="**/*.gif"/>
+    <include name="**/*.ico"/>
+    <include name="**/*.jpg"/>
+    <include name="**/*.jpeg"/>
+    <include name="**/*.png"/>
+    <include name="**/*.js"/>
+
+    <!-- static fonts -->
+    <include name="**/*.eot"/>
+    <include name="**/*.svg"/>
+    <include name="**/*.ttf"/>
+    <include name="**/*.woff"/>
+    <include name="**/*.woff2"/>
+  </patternset>
+
+  <!-- ================================================================== -->
+  <!-- ==== Targets (Preparation)                                         -->
+  <!-- ================================================================== -->
+
+  <target name="prepare">
+    <mkdir dir="${staging.webapp.dir}"/>
+    <mkdir dir="${staging.webapp.dir}/WEB-INF/lib"/>
+    <mkdir dir="${staging.classes.dir}"/>
+    <mkdir dir="${staging.test_classes.dir}"/>
+    <mkdir dir="${staging.test_results.dir}"/>
+
+    <mkdir dir="${tomcat.webapps.dir}/${tomcat.webapp.name}"/>
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- ==== Targets (Destroy and Cleanup)                                 -->
+  <!-- ================================================================== -->
+
+  <target name="destroy">
+    <delete dir="${staging.base.dir}"/>
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- ==== Targets (Compilation)                                         -->
+  <!-- ================================================================== -->
+
+  <!-- Compile everything that has changed -->
+  <target name="compile" depends="prepare">
+    <javac srcdir="${src.dir}" destdir="${staging.classes.dir}" optimize="no" debug="yes"
+           deprecation="${javac.deprecation}" includeAntRuntime="false">
+      <classpath>
+        <path refid="webapp.classpath"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="compile_tests" depends="compile">
+    <javac srcdir="${test_src.dir}" destdir="${staging.test_classes.dir}" optimize="no" debug="yes"
+           deprecation="$javac.deprecation}" includeAntRuntime="false">
+      <classpath>
+        <path refid="webapp.test.classpath"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- ==== Targets (Testing)                                             -->
+  <!-- ================================================================== -->
+
+  <target name="test" depends="compile_tests, prepare">
+    <junit printsummary="true" haltonfailure="true">
+      <classpath>
+        <path refid="webapp.test.classpath"/>
+        <pathelement path="${staging.test_classes.dir}"/>
+      </classpath>
+
+      <formatter type="plain"/>
+
+      <batchtest todir="${staging.test_results.dir}">
+        <fileset dir="${staging.test_classes.dir}">
+          <or>
+            <filename name="**/*Test.*"/>
+          </or>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- ==== Targets (Packaging)                                           -->
+  <!-- ================================================================== -->
+
+  <target name="app_jar" depends="test, compile">
+    <jar destfile="${staging.app.jar}">
+      <fileset dir="${staging.classes.dir}">
+        <include name="**/*.class"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <target name="package" depends="app_jar">
+
+    <!-- WEB-INF lib files -->
+    <copy todir="${staging.webapp.dir}/WEB-INF/lib" preservelastmodified="true" flatten="true">
+      <fileset dir="${lib.dir}">
+        <patternset refid="lib.pattern"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${staging.webapp.dir}" preservelastmodified="true" flatten="false">
+      <fileset dir="${www.dir}">
+        <patternset refid="www.pattern"/>
+      </fileset>
+    </copy>
+
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- ==== Targets (Deployment)                                          -->
+  <!-- ================================================================== -->
+
+  <target name="sleep">
+    <echo message="Sleeping for 2 seconds..."/>
+    <sleep seconds="2"/>
+  </target>
+
+  <target name="deploy" depends="package, sleep">
+
+    <!-- WEB-INF lib files -->
+    <copy todir="${tomcat.webapps.dir}/${tomcat.webapp.name}" preservelastmodified="true"
+          verbose="true" flatten="false">
+      <fileset dir="${staging.webapp.dir}">
+        <include name="**/*"/>
+      </fileset>
+    </copy>
+
+  </target>
+
+  <target name="deploy_jsp">
+
+    <copy todir="${tomcat.webapps.dir}/${tomcat.webapp.name}" preservelastmodified="true"
+          verbose="true" flatten="false">
+      <fileset dir="${www.dir}">
+        <patternset refid="www.pattern"/>
+      </fileset>
+    </copy>
+
+  </target>
+
+  <patternset id="bootswatch.files">
+    <include name="bootstrap.css"/>
+    <include name="bootstrap.min.css"/>
+  </patternset>
+
+  <macrodef name="copy-theme">
+    <attribute name="theme"/>
+
+    <sequential>
+      <copy todir="${www.dir}/static/bootstrap${bootstrap.version}/@{theme}" preservelastmodified="true"
+            verbose="true" flatten="false">
+        <fileset dir="${env.WORK_HOME_GIT}/bootswatch/@{theme}">
+          <patternset refid="bootswatch.files"/>
+        </fileset>
+      </copy>
+    </sequential>
+  </macrodef>
+
+  <target name="copy_from_bootswatch">
+    <sequential>
+      <!-- copy default distribution -->
+      <copy todir="${www.dir}/static/bootstrap${bootstrap.version}/default" preservelastmodified="true"
+            verbose="true" flatten="false">
+        <fileset dir="${env.WORK_HOME_GIT}/bootswatch/bower_components/bootstrap/dist/css">
+          <patternset refid="bootswatch.files"/>
+        </fileset>
+      </copy>
+
+      <!-- Copy Fonts -->
+      <copy todir="${www.dir}/static/bootstrap${bootstrap.version}/fonts" preservelastmodified="true"
+            verbose="true" flatten="true">
+        <fileset dir="${env.WORK_HOME_GIT}/bootswatch/bower_components/bootstrap/dist/fonts">
+          <include name="*.*"/>
+        </fileset>
+      </copy>
+
+      <!-- Copy JavaScript -->
+      <copy todir="${www.dir}/static/bootstrap${bootstrap.version}/js" preservelastmodified="true"
+            verbose="true" flatten="true">
+        <fileset dir="${env.WORK_HOME_GIT}/bootswatch/bower_components/bootstrap/dist/js">
+          <include name="bootstrap.*"/>
+        </fileset>
+      </copy>
+    </sequential>
+
+    <copy-theme theme="cerulean"/>
+    <copy-theme theme="cosmo"/>
+    <copy-theme theme="cyborg"/>
+    <copy-theme theme="darkly"/>
+    <copy-theme theme="flatly"/>
+    <copy-theme theme="journal"/>
+    <copy-theme theme="lumen"/>
+    <copy-theme theme="paper"/>
+    <copy-theme theme="readable"/>
+    <copy-theme theme="sandstone"/>
+    <copy-theme theme="simplex"/>
+    <copy-theme theme="slate"/>
+    <copy-theme theme="spacelab"/>
+    <copy-theme theme="superhero"/>
+    <copy-theme theme="united"/>
+    <copy-theme theme="yeti"/>
+
+    <!-- Copy custom -->
+    <copy-theme theme="custom"/>
+
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- ==== Targets (Shortcuts)                                           -->
+  <!-- ================================================================== -->
+
+  <target name="dd" depends="destroy, deploy"/>
+  <target name="dj" depends="deploy_jsp"/>
+
+  <!-- ================================================================== -->
+  <!-- ==== Targets (Help)                                                -->
+  <!-- ================================================================== -->
+
+  <target name="help_settings">
+    <echo message="Java Home       : ${env.JAVA_HOME}"/>
+    <echo message="Tomcat Home     : ${env.TOMCAT_HOME}"/>
+    <echo message="Ant Home        : ${env.ANT_HOME}"/>
+    <echo message="Staging Dir     : ${staging.base.dir}"/>
+    <echo message="Work Home       : ${env.WORK_HOME}"/>
+    <echo message="Work Home (Git) : ${env.WORK_HOME_GIT}"/>
+  </target>
+
+  <target name="help" depends="help_settings">
+    <echo>
+      "html5css3template" is an implementation of a vanilla web app that uses
+      the latest Java and web technology available.
+
+      Targets are:
+
+      - prepare ..... Creates the Staging and Deployment directories
+      - destroy ..... Destroys the Staging directories
+      - compile ..... Compiles all java classes
+      - test ........ Compiles and runs all tests
+      - deploy ...... Deploys the application to the Tomcat webapp dir
+      - deploy_jsp .. Deploys only the JSPs of the application to Tomcat
+
+      Shortcuts:
+      - dd .......... destroy, deploy
+      - dj .......... deploy_jsp
+    </echo>
+  </target>
+
+</project>

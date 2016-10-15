@@ -1,0 +1,156 @@
+/* ============================================================================================== */
+/* ==== Fixes to make bootswatch elements to display nicely */
+/* ============================================================================================== */
+
+body {
+  padding-top: 0;
+}
+
+.bs-docs-section {
+  margin-top: 0
+}
+
+.bs-docs-section h1 {
+  padding-top: 0;
+}
+
+.page-header {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.bs-glyphicons li {
+  width: 12.5%;
+  height: 80px;
+  font-size: 12px;
+  float: left;
+  padding: 10px;
+  line-height: 1.2;
+  text-align: center;
+  background-color: #ccc;
+  border: 1px solid #fff;
+}
+
+.glyphicon {
+  font-size: 24px;
+}
+
+.glyphicon-class {
+  display: block;
+}
+
+/* ============================================================================================== */
+
+/* ============================================================================================== */
+.navbar-alternative {
+  background-color: #3498DB;
+  border-color: transparent;
+}
+
+.navbar-alternative .navbar-brand {
+  color: #fff;
+}
+
+.navbar-alternative .navbar-brand:hover, .navbar-alternative .navbar-brand:focus {
+  color: #2C3E50;
+  background-color: transparent;
+}
+
+.navbar-alternative .navbar-text {
+  color: #fff;
+}
+
+.navbar-alternative .navbar-nav > li > a {
+  color: #fff;
+}
+
+.navbar-alternative .navbar-nav > li > a:hover, .navbar-alternative .navbar-nav > li > a:focus {
+  color: #2C3E50;
+  background-color: transparent;
+}
+
+.navbar-alternative .navbar-nav > .active > a, .navbar-alternative .navbar-nav > .active > a:hover, .navbar-alternative .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #258cd1;
+}
+
+.navbar-alternative .navbar-nav > .disabled > a, .navbar-alternative .navbar-nav > .disabled > a:hover, .navbar-alternative .navbar-nav > .disabled > a:focus {
+  color: #ccc;
+  background-color: transparent;
+}
+
+.navbar-alternative .navbar-toggle {
+  border-color: #217dbb;
+}
+
+.navbar-alternative .navbar-toggle:hover, .navbar-alternative .navbar-toggle:focus {
+  background-color: #217dbb;
+}
+
+.navbar-alternative .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+
+.navbar-alternative .navbar-collapse,
+.navbar-alternative .navbar-form {
+  border-color: #2386c8;
+}
+
+.navbar-alternative .navbar-nav > .open > a, .navbar-alternative .navbar-nav > .open > a:hover, .navbar-alternative .navbar-nav > .open > a:focus {
+  background-color: #258cd1;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .navbar-alternative .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: transparent;
+  }
+
+  .navbar-alternative .navbar-nav .open .dropdown-menu .divider {
+    background-color: transparent;
+  }
+
+  .navbar-alternative .navbar-nav .open .dropdown-menu > li > a {
+    color: #fff;
+  }
+
+  .navbar-alternative .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-alternative .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #2C3E50;
+    background-color: transparent;
+  }
+
+  .navbar-alternative .navbar-nav .open .dropdown-menu > .active > a, .navbar-alternative .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-alternative .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #258cd1;
+  }
+
+  .navbar-alternative .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-alternative .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-alternative .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #ccc;
+    background-color: transparent;
+  }
+}
+
+.navbar-alternative .navbar-link {
+  color: #fff;
+}
+
+.navbar-alternative .navbar-link:hover {
+  color: #2C3E50;
+}
+
+.navbar-alternative .btn-link {
+  color: #fff;
+}
+
+.navbar-alternative .btn-link:hover, .navbar-alternative .btn-link:focus {
+  color: #2C3E50;
+}
+
+.navbar-alternative .btn-link[disabled]:hover, .navbar-alternative .btn-link[disabled]:focus, fieldset[disabled] .navbar-alternative .btn-link:hover, fieldset[disabled] .navbar-alternative .btn-link:focus {
+  color: #ccc;
+}
+
+.navbar-alternative .badge {
+  background-color: #fff;
+  color: #3498DB;
+}

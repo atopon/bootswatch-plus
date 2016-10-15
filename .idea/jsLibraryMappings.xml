@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$WORK_HOME_GIT$/bootswatch" libraries="{bootswatch/node_modules}" />
+  </component>
+</project>
