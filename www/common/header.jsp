@@ -24,6 +24,8 @@
     <c:set var="style" value="${param.style}"/>
   </c:if>
 
+  <c:set var="downloadStyle" value="${style}" scope="session"/>
+
   <!-- Customized bootstrap default and themed CSS styles -->
   <link rel="stylesheet" href="<c:url value="/static/bootstrap337/${style}/bootstrap.css" />"/>
 

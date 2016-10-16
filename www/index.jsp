@@ -42,6 +42,8 @@
         <div class="panel-heading panel-">Additional Themes</div>
         <div class="panel-body">
           <div class="btn-group-vertical btn-group-xs center-block">
+            <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=atopon_one">atopon_one</a>
+            <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=atopon_two">atopon_two</a>
             <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=darkly_small">darkly_small</a>
             <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=flatly_small">flatly_small</a>
             <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=simplex_alt">simplex_alt</a>
@@ -53,31 +55,25 @@
 
     <div class="col-lg-9 col-md-9 col-sm-9">
 
-      <h1>Bootswatch-plus v0.5</h1>
+      <h1>Bootswatch-plus v0.6</h1>
 
       <h4>(based on Bootstrap v3.3.7)</h4>
 
       <p>
-
+        <strong>Bootswatch-plus</strong> is a webapp demonstrating a collection of experiments and additional
+        themes for the popular
+        <a href="http://getbootstrap.com/">Bootstrap</a> framework,
+        based on <a href="https://bootswatch.com/">Bootswatch</a> themes.
+        Using it is as easy as downloading the CSS files below and using them instead of your bootstrap CSS.
       </p>
 
-      <p>To build the custom (or any) template using LESS use:</p>
+      <h2>Download This theme</h2>
 
-      <pre>M:\g4\bootswatch>grunt swatch:custom</pre>
-
-      <p>To build the custom (or any) template using SASS use: [LOOKOUT for glyphicons going to the wrong dir (../bootstrap/... as opposed to ../fonts/....) or something like that anyway]</p>
-
-      <pre>M:\g4\bootswatch>grunt swatch_scss:custom</pre>
-
-      <h2>Downloads</h2>
-
-      <%-- Variable style has been set in header.jsp --%>
-      <p>
+      <%-- Variable downloadStyle has been set in header.jsp --%>
       <ul>
-        <li><a href="<c:url value="/static/bootstrap337/${style}/bootstrap.css" />">bootstrap.css</a></li>
-        <li><a href="<c:url value="/static/bootstrap337/${style}/bootstrap.min.css" />">bootstrap.min.css</a></li>
+        <li><a href="<c:url value="/static/bootstrap337/${downloadStyle}/bootstrap.css" />">bootstrap.css</a></li>
+        <li><a href="<c:url value="/static/bootstrap337/${downloadStyle}/bootstrap.min.css" />">bootstrap.min.css</a></li>
       </ul>
-      </p>
 
       <!-- Elements -->
       <h2>Elements</h2>
@@ -180,6 +176,7 @@
         </div>
       </nav>
 
+      <%--
       <nav class="navbar navbar-alternative">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -221,6 +218,7 @@
           </div>
         </div>
       </nav>
+      --%>
       <!-- End of navs -->
 
       <h1>What next?</h1>

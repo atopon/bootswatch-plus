@@ -15,6 +15,7 @@
   <h2>History</h2>
 
   <ul>
+    <li>0.7 - Added atopon_one and atopon_two.</li>
     <li>0.6 - Moved to new directory structure, new github repo, renamed to bootswatch-plus.</li>
     <li>0.5 - Added flatly small and darkly small.</li>
     <li>0.4 - Added simplex blue.</li>

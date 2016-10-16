@@ -273,6 +273,8 @@
 
   <!-- Copy additional themes -->
   <target name="copy_customized_themes">
+    <copy-theme theme="atopon_one"/>
+    <copy-theme theme="atopon_two"/>
     <copy-theme theme="darkly_small"/>
     <copy-theme theme="flatly_small"/>
     <copy-theme theme="simplex_alt"/>
@@ -305,34 +307,34 @@
 
   <target name="help" depends="help_settings">
     <echo>
-      ### bbootswatch-plus ###
+      ### bootswatch-plus ###
 
       A collection of experiments and additions to bootswatch themes.
 
       ## To create a new theme ##
-
       - clone a dir and add it to composer.json and Gruntfile.js in bootswatch repo.
-
+      -
 
       Targets are:
 
-      # Importing from Bootswatch version ${bootstrap.version}
-      - copy_from_bootswatch .... Copies default theme, js and fonts into www/static/bootstrap${bootstrap.version}.
-      - copy_themes .............
+      # Importing from Bootswatch version ${bootstrap.version}.
+      - copy_from_bootswatch .... Copies default theme, js and fonts into:
+                                  www/static/bootstrap${bootstrap.version}.
+      - copy_themes ............. copied all standard themes.
       - copy_customized_themes .. copies the customized themes.
       - copy_all ................ copies everything from the Bootswatch repo directory.
 
-
-      - prepare ..... creates the Staging and Deployment directories
-      - destroy ..... destroys the Staging directories
-      - compile ..... compiles all java classes
-      - deploy ...... deploys the application to the Tomcat webapp dir
-      - deploy_jsp .. deploys only the JSPs of the application to Tomcat
-
+      # Building web-app, and deploying to local Tomcat.
+      - prepare ................. creates the Staging and Deployment directories
+      - destroy ................. destroys the Staging directories
+      - compile ................. compiles all java classes
+      - deploy .................. deploys the application to the Tomcat webapp dir
+      - deploy_jsp .............. deploys only the JSPs of the application to Tomcat
 
       Shortcuts:
-      - dd .......... destroy, deploy
-      - dj .......... deploy_jsp
+      - dd ...................... destroy, deploy
+      - dj ...................... deploy_jsp
+      - cct ..................... copy_customized_themes
     </echo>
   </target>
 

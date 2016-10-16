@@ -40,8 +40,8 @@ body {
 }
 
 /* ============================================================================================== */
-
-/* ============================================================================================== */
+/* ==== Alternative navbar */
+/* ============================================================================================== *
 .navbar-alternative {
   background-color: #3498DB;
   border-color: transparent;
@@ -96,10 +96,6 @@ body {
   border-color: #2386c8;
 }
 
-.navbar-alternative .navbar-nav > .open > a, .navbar-alternative .navbar-nav > .open > a:hover, .navbar-alternative .navbar-nav > .open > a:focus {
-  background-color: #258cd1;
-  color: #fff;
-}
 
 @media (max-width: 767px) {
   .navbar-alternative .navbar-nav .open .dropdown-menu > .dropdown-header {
