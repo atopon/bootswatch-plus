@@ -43,7 +43,9 @@
         <div class="panel-body">
           <div class="btn-group-vertical btn-group-xs center-block">
             <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=atopon_one">atopon_one</a>
+            <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=atopon_one_mini">atopon_one_mini</a>
             <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=atopon_two">atopon_two</a>
+            <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=atopon_two_mini">atopon_two_mini</a>
             <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=darkly_small">darkly_small</a>
             <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=flatly_small">flatly_small</a>
             <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/?style=simplex_alt">simplex_alt</a>

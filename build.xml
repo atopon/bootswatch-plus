@@ -274,7 +274,9 @@
   <!-- Copy additional themes -->
   <target name="copy_customized_themes">
     <copy-theme theme="atopon_one"/>
+    <copy-theme theme="atopon_one_mini"/>
     <copy-theme theme="atopon_two"/>
+    <copy-theme theme="atopon_two_mini"/>
     <copy-theme theme="darkly_small"/>
     <copy-theme theme="flatly_small"/>
     <copy-theme theme="simplex_alt"/>
